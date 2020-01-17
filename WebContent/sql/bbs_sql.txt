@@ -1,0 +1,51 @@
+-- bbs_sql.txt
+-- 답변형게시판(댓글)
+create table tb_bbs(
+  bbsno    number(5)       not null -- 일련번호 -99999~99999
+ ,wname    varchar2(20)    not null -- 작성자
+ ,subject  varchar2(100)   not null -- 글제목
+ ,content  varchar2(2000)  not null -- 글내용
+ ,passwd   varchar2(10)    not null -- 글비밀번호
+ ,readcnt  number(5)       default 0 not null -- 글조회수
+ ,regdt    date            default  sysdate   -- 글작성일
+ ,grpno    number(5)       not null  -- 글 그룹번호
+ ,indent   number(5)       default 0 -- 들여쓰기
+ ,ansnum   number(5)       default 0 -- 글순서
+ ,ip       varchar2(15)    not null  -- 글 IP
+ ,primary key(bbsno)                 --bbsno 기본키 
+);
+
+-- 새글쓰기
+bbsno      : max(bbsno)+1
+wname, subject, content, passwd : 사용자입력
+default 값 : readcnt, regdt, indent, ansnum
+grpno      : max(bbsno)+1
+ip         : request내부객체에서 사용자PC의 IP정보를 가져옴
+
+--행추가 테스트
+insert into tb_bbs(bbsno, wname, subject, content, passwd, grpno, ip)
+values(
+      (select nvl(max(bbsno),0)+1 from tb_bbs)
+      ,'옥돌이'
+      ,'오필승친구여'
+      ,'무궁화 꽃이 피었나요?'
+      ,'1234'
+      ,(select nvl(max(bbsno),0)+1 from tb_bbs)
+      ,'127.0.0.1' 
+);
+
+--행갯수
+select count(*) from tb_bbs;
+
+--조회수 증가 
+
+update tb_bbs set readcnt=readcnt+1 where bbsno=? 
+
+
+
+-- 행삭제 
+delete from tb_bbs
+where bbsno=? and passwd=?
+
+
+
