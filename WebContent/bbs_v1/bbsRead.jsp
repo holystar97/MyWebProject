@@ -64,9 +64,9 @@
 	
 		</table>	
 		<br>
-		<input type="button" value="답변" onclick="location.href='bbsReply.jsp?col=<%=col%>&word=<%=word%>&nowPage=<%=nowPage%>&bbsno=<%=bbsno%>'">
-		<input type="button" value="수정" onclick="location.href='bbsUpdate.jsp?col=<%=col%>&word=<%=word%>&nowPage=<%=nowPage%>&bbsno=<%=bbsno%>'">
-		<input type="button" value="삭제" onclick="location.href='bbsDel.jsp?col=<%=col%>&word=<%=word%>&nowPage=<%=nowPage%>&bbsno=<%=bbsno%>'">
+		<input type="button" value="답변" onclick="location.href='bbsReply.jsp?bbsno=<%=bbsno%>'">
+		<input type="button" value="수정" onclick="location.href='bbsUpdate.jsp?bbsno=<%=bbsno%>'">
+		<input type="button" value="삭제" onclick="location.href='bbsDel.jsp?bbsno=<%=bbsno%>'">
 <%	  
   }//if end
 %>

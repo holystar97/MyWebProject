@@ -11,24 +11,3 @@
 <jsp:useBean id ="dao" class="net.bbs.BbsDAO"></jsp:useBean>
 
 <%request.setCharacterEncoding("UTF-8"); %> 
-
-
-<%
-//검색관련
-String col=request.getParameter("col");
-String word=request.getParameter("word");
-if(col==null){//검색 칼럼이 없다면  
-	col="";
-}
-if(word==null){ // 검색어가 없다면 
-	word="";
-}
-
-// 현재 페이지
-int nowPage=1;
-if(request.getParameter("nowPage")!=null){
-	nowPage=Integer.parseInt(request.getParameter("nowPage"));
-}
-
-%>
-

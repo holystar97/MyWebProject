@@ -24,11 +24,4 @@ if(word==null){ // 검색어가 없다면
 	word="";
 }
 
-// 현재 페이지
-int nowPage=1;
-if(request.getParameter("nowPage")!=null){
-	nowPage=Integer.parseInt(request.getParameter("nowPage"));
-}
-
 %>
-

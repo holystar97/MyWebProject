@@ -1,32 +1,27 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../header.jsp"%>
+<%@ page import="net.bbs.*" %>
 <%@ include file="ssi.jsp"%>
-<!-- 본문시작 bbsReply.jsp-->
-<h3>*답변 쓰기*</h3>
-<p><a href="bbsList.jsp">[글목록]</a></p>
+
+<!-- 본문시작 bbsForm.jsp-->
+<h3>*글 수정*</h3>
+<p><a href="bbsList.jsp">[글 목록]</a></p>
 <form name="bbsfrm"
       method="post"
-      action="bbsReplyProc.jsp"
+      action="bbsUpdateProc.jsp"
       onsubmit="return bbsCheck(this)">
-
-<!-- 부모 글번호 -->
       
-<input type="hidden"
-       name="bbsno"
-       value="<%=request.getParameter("bbsno")%>">   
-<!-- 현재 페이지 유지하기 위해서  -->
-<input type="hidden"
-       name="nowPage"
-       value="<%=nowPage%>">   
-
-<input type="hidden"
-       name="col"
-       value="<%=col%>">  
-
-<input type="hidden"
-       name="word"
-       value="<%=word%>">    
-       
+ <input type="hidden"
+  name="bbsno"
+  value="<%=request.getParameter("bbsno")%>">  
+  
+  <%
+	int bbsno=Integer.parseInt(request.getParameter("bbsno"));
+	BbsDTO update=dao.update(bbsno);
+	dto=update;
+%>
+  
+  
 <table class="table">
 <tr>
   <th>작성자</th>
@@ -46,7 +41,7 @@
 </tr>
 <tr>
     <td colspan="2" align="center">
-      <input type="submit" value="답변쓰기" class="btn btn-primary">
+      <input type="submit" value="쓰기" class="btn btn-primary">
       <input type="reset" value="취소"  class="btn btn-primary">
     </td>
 </tr> 

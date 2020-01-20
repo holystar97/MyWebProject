@@ -48,4 +48,81 @@ delete from tb_bbs
 where bbsno=? and passwd=?
 
 
+--검색 
+--제목에 '무궁화'가 포함된 행을 조회하시오 
+
+select subject from tb_bbs where subject like '%무궁화%'; 
+
+--페이징(rownum 줄번호 활용)
+--목록중에서 2페이지 조회
+--(단, 전체 레코드 갯수 11건
+		한 페이지에 5줄 기준)
+
+1) 
+select subject,grpno,ansnum
+from tb_bbs
+order by grpno desc, ansnum asc;
+
+
+2) rownum 추가 -- 줄번호까지 정렬됨
+
+select rownum,subject,grpno,ansnum
+from tb_bbs
+order by grpno desc, ansnum asc;
+
+3) 1)번 sql문을 셀프 조인 후 나중에 rownum 추가 
+
+select rownum,subject,grpno,ansnum
+from (
+	select subject,grpno,ansnum
+	from tb_bbs
+	order by grpno desc, ansnum asc
+);
+
+4) 줄번호 1~5 조회(1페이지)
+select rownum,subject,grpno,ansnum
+from (
+	select subject,grpno,ansnum
+	from tb_bbs
+	order by grpno desc, ansnum asc
+)
+where rownum>=1 and rownum<=5;
+
+5) 줄번호 6~10 조회 (2페이지)   -> 조회안됨
+select rownum,subject,grpno,ansnum
+from (
+	select subject,grpno,ansnum
+	from tb_bbs
+	order by grpno desc, ansnum asc
+)
+where rownum>=6 and rownum<=10;
+
+6) 줄번호가 있는 3) 번 테이블을 한번더 셀프 조인 후
+rownum 칼럼명을 rnum으로 바꾼다 
+
+select rnum, subject, grpno, ansnum
+from(
+	select rownum as rnum,subject,grpno,ansnum
+	from (
+		select subject,grpno,ansnum
+		from tb_bbs
+		order by grpno desc, ansnum asc
+		)
+	)
+where rnum>=6 and rnum<=10;
+
+7) 검색 + 페이징
+
+예) 제목에서 '옥돌스크' 검색해서 2페이지 출력
+select rnum, subject, grpno, ansnum
+from(
+	select rownum as rnum,subject,grpno,ansnum
+	from (
+		select subject,grpno,ansnum
+		from tb_bbs
+		where subject like '%옥돌스크%'
+		order by grpno desc, ansnum asc
+		)
+	)
+where rnum>=6 and rnum<=10;
 

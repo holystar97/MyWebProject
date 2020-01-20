@@ -16,10 +16,7 @@
   
 <%
   //검색 목록 (col 칼럼명, word 검색어)
-  //한 페이지당 출력할 글의 행수
-  int recordPerPage=5;
-
-  ArrayList<BbsDTO> list=dao.list(col, word, nowPage, recordPerPage);
+  ArrayList<BbsDTO> list=dao.list(col,word);
   if(list==null){
     out.println("<tr>");
     out.println("  <td colspan='4'><strong>관련 자료 없음!!</td>");
@@ -41,7 +38,7 @@
 %>      
 	
 
-      <a href="bbsRead.jsp?col=<%=col%>&word=<%=word%>&nowPage=<%=nowPage%>&bbsno=<%=dto.getBbsno()%>"><%=dto.getSubject()%></a>
+      <a href="bbsRead.jsp?bbsno=<%=dto.getBbsno()%>"><%=dto.getSubject()%></a>
 <%
                  //조회수가 10이상이면 hot이미지 출력
                  if(dto.getReadcnt()>=10){
@@ -77,19 +74,6 @@
     out.println("</tr>");     
     
 %>
-
-	<!-- 페이지 리스트 시작 -->
-	<tr>
-		<td colspan="4">
-<%
-		String paging=new Paging().paging(totalRecord, nowPage, recordPerPage, col, word, "bbsList.jsp");
-		out.print(paging);
-%>		
-		</td>
-	</tr>
-	<!-- 페이지 리스트 끝 -->
-
-
     <!-- 검색 시작  -->
     	<td colspan="4" style="text-align: center; height: 50px">
  		<form action="bbsList.jsp" onsubmit="return searchCheck(this)">
