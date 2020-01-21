@@ -83,5 +83,43 @@ function searchCheck(f){
 	return true;
 }
 
+function loginCheck(f){
+	//로그인 유효성 검사 
+	//1) 아이디 5~10글자 이내
+	var id=f.s_id.value;
+	  id=id.trim();
+	  if(id.length>=5 && id.length <10){
+		alert("아이디를  5글자이상 10글자 이내로 입력해 주세요");
+		f.id.focus();
+		return false;
+	  }//if end	
+	//2) 비밀번호 5~10글자 이내 
+	  var pw=f.s_passwd.value;
+	  pw=pw.trim();
+	  if(pw.length>=5 && pw.length <10){
+		alert("비밀번호를  5글자이상 10글자 이내로 입력해 주세요");
+		f.pw.focus();
+		return false;
+	  }//if end	
+	  
+	return true;
+}
+
+
+function idCheck() {
+	  //아이디 중복확인
+		
+	  //새창만들기(팝업)
+	  //window.open("파일명", "새창이름", "다양한옵션들")
+	  window.open("idCheckForm.jsp", "idwin"
+			      ,"width=400, height=350");	
+		
+	}//idCheck() end
+
+function emailCheck(){
+	
+}
+
+
 
 

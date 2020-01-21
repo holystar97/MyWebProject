@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
   <display-name>myweb</display-name>
+<!--web.xml 배치 관리자 
+	-세션 시간 설정, 한글 필터 등록, 서블릿등록, 기타 등등 환경설정하는 페이지
+	-web.xml이 수정이 되면 반드시 서버를 재시작할 것 !  
+ -->
+ 
+ <!-- 해장 사이트 연결시 첫 페이지 등록  
+ 	 http://localhost:8090/myweb/
+ -->
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+<!-- 세션 유지 시간 등록(20분) -->
+<session-config>
+	<session-timeout>20</session-timeout>
+</session-config>
+  
+ <!-- Ctrl+ Shift+ F 페이지 자동 정렬 -->
+
+  
 </web-app>
