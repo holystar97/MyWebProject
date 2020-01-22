@@ -19,6 +19,25 @@
 		session.setAttribute("s_passwd",passwd);
 		session.setAttribute("s_mlevel",mlevel);
 		
+		//쿠키(아이디 저장)
+		String c_id=Utility.checkNull(request.getParameter("c_id"));
+		Cookie cookie=null;
+		if(c_id.equals("SAVE")){ // 아이디 저장 체크를 했다면
+			//쿠키 변수 선언 
+			//new Cookie("쿠키 변수명",값);
+			cookie=new Cookie("c_id",id);
+			//쿠키의 생존 기간, 1개월 
+			cookie.setMaxAge(60*60*24*30);
+			
+		}else{
+			cookie=new Cookie("c_id","");
+			cookie.setMaxAge(0);
+		}
+		
+		response.addCookie(cookie);
+		//
+		
+		
 		//첫페이지로 이동
 		String root=Utility.getRoot();
 		response.sendRedirect(root+"/index.jsp");

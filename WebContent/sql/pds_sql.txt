@@ -1,0 +1,30 @@
+-- pds_sql.txt
+-- 테이블 생성
+CREATE TABLE tb_pds (
+  pdsno       NUMBER         NOT NULL
+  ,wname      VARCHAR2(100)  NOT NULL
+  ,subject    VARCHAR2(250)  NOT NULL
+  ,regdate    DATE           NOT NULL
+  ,passwd     VARCHAR2(15)   NOT NULL
+  ,readcnt    NUMBER         DEFAULT 0
+  ,filename   VARCHAR2(250)  NOT NULL   --파일명
+  ,filesize   NUMBER         DEFAULT 0  --파일크기
+  ,PRIMARY KEY(pdsno)
+);
+
+
+-- 행추가
+pdsno                  : max(일련번호)+1
+wname, subject, passwd : 사용자 입력
+filename, filesize     : 첨부파일 관련 정보
+regdate                : 오늘날짜
+
+
+insert into tb_pds(pdsno, wname, subject, passwd
+                   , filename, filesize, regdate)
+values( (select nvl(max(pdsno),0)+1 from tb_pds)
+        , ?,?,?,?,?, sydate);
+
+-- 목록
+select * from tb_pds
+order by regdate desc;

@@ -59,3 +59,11 @@ from member
 where id=?
 
 
+--회원가입
+insert into member(id, passwd, mname, tel, email, zip) values (?,?,?,?,?,?,?,?,?,'D1',sysdate);
+
+회원가입 성공 후 (memberProc.jsp)
+로그인 페이지로 이동 (loginForm.jsp) 이동
+
+
+

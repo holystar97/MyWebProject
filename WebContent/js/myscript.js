@@ -120,6 +120,54 @@ function emailCheck(){
 	
 }
 
+function memberCheck(f){
+	// 회원가입 유효성 검사
+	//1) 아이디 5~10글자 이내 인지 ?
+	//2) 비밀번호 5~10글자 이내인지 ?
+	//3) 비밀번호와 비밀번호 확인이 서로 일치하는지? 
+	//4) 이름 2~20글자 이내인지 ?
+	//5) 이메일에 @문자가 있는지 ? 
+	//6) 직업을 선택했는지 ? 
+	var job=f.job.value;
+	if(job=="0"){
+		alert("직업 선택해주세요 ");
+		return false;
+	}
+	return true;
+}
 
+function pdsCheck(f){
+	
+	//포토 갤러리 유효성 검사 
+	// 1) 이름 
+	// 2) 제목
+	// 3) 비밀번호는 4~15글자 이내인지?
+	// 4) 첨부파일
+	var filename=f.filename.value;
+	filename=filename.trim();
+	if(filename.length==0){
+		alert("첨부파일 선택해 주세요");
+		return false;
+	}else{
+		//마지막 . 의 순서값을 가져오기 
+		var dot=filename.lastIndexOf(".");
+		if(dot==-1){ // . 기호가 없다면 
+			alert("첨부 파일을 다시 선택해주세요 ");
+			return false;
+		}else{
+			// 마지막 . 기호 이후 문자열만 자르기 
+			var ext=filename.substr(dot+1);
+			// 전부 소문자로 치환
+			ext=ext.toLowerCase();
+			if(ext=="png" || ext=="jpg"|| ext=="gif"){
+				return true;
+			}else{
+				alert("이미지 파일만 가능합니다!! ");
+				return false;
+			}
+		}
+	}
+	
+}
 
 

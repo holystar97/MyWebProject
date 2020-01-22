@@ -7,6 +7,21 @@
 <%
 	if(s_id.equals("guest") || s_passwd.equals("guest") || s_mlevel.equals("guest")){
 		//로그인을 하지 않은 경우 
+		
+		//쿠키값 가져오기
+		Cookie[] cookies =request.getCookies();
+		String c_id="";
+		if(cookies!=null){
+			//쿠키가 존재하는지 ?
+				for(int i=0; i<cookies.length;i++){
+					Cookie cookie=cookies[i];
+					//쿠키변수 c_id가 있는지 ?
+					if(cookie.getName().equals("c_id")==true){
+						c_id=cookie.getValue();
+					}
+				}
+		}
+		
 %>
 <form name="loginfrm"
       method="post"
@@ -15,10 +30,11 @@
 <table class="table">
 <tr>
   <td>
-     <input type="text" name="id" placeholder="아이디" required>
+     <input type="text" name="id" value="<%=c_id %>" placeholder="아이디" required>
   </td>
   <td rowspan="2">
-     <input type="image" src="../images/bt_login.gif">
+     <input type="image" src="../images/bt_login.gif" style="cursor: pointer">
+     <!--cusror:pointer는 커서 손모양 <input type=image>는 기본속성이 submit -->
   </td>
 </tr>
 <tr>
@@ -28,7 +44,7 @@
 </tr>
 <tr>
   <td colspan="2">
-     <input type="checkbox" name="c_id">아이디저장
+     <input type="checkbox" name="c_id" value="SAVE" <%if(!(c_id.isEmpty())){out.print("checked");} %>>아이디저장
      &nbsp;&nbsp;
      <a href="agreement.jsp">회원가입</a>
      &nbsp;&nbsp;
