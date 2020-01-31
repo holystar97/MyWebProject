@@ -20,5 +20,33 @@
   
  <!-- Ctrl+ Shift+ F 페이지 자동 정렬 -->
 
+  <!-- MyController 서블릿 등록  -->
+  <servlet>
+  	<servlet-name>mycontroller</servlet-name>
+  	<servlet-class>net.controller.MyController</servlet-class>
+  	<init-param>
+  		<param-name>propertyConfig</param-name>
+  		<param-value>D:/java1209/workspace/myweb/WebContent/WEB-INF/command.properties</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>mycontroller</servlet-name>
+  	<url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 한글 필터 등록  -->
+  <filter>
+  	<filter-name>encode</filter-name>
+  	<filter-class>net.utility.EncodeFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>encode</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+
+  
+  
+  
   
 </web-app>
