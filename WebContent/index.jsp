@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -126,7 +129,7 @@
         <li><a href="./member/loginForm.jsp">로그인</a></li>
         <li><a href="./pds/pdsList.jsp">포토갤러리</a></li>
         <li><a href="./mail/mailForm.jsp">메일보내기</a></li>
-        
+        <li><a href="./bbs2/bbslist.do">게시판(MVC)</a></li>
       </ul>
     </div>
   </div>
