@@ -3,8 +3,6 @@
 <%@ page import="java.sql.Timestamp" %>
 
 <!-- 본문시작  -->
-	여기에서 본문 내용을 작성하세요 !! 
-	
 	<!DOCTYPE html>
 	<html>
 	<meta charset="UTF-8">
@@ -42,7 +40,7 @@
 			
 			<!-- fmt: formateDate 액션에서 Timestamp 객체를 사용하기 위해서  -->
 			<c:set var ="today" value="<%=new Timestamp(System.currentTimeMillis()) %>"/>
-			<c:set var ="today" value="${fn:substring(today,0,10}"/> <!-- 오늘 날짜 -->
+			<c:set var ="today" value="${fn:substring(today,0,10)}"/> <!-- 오늘 날짜 -->
 			<c:forEach var ="article" items="${articleList}">
 				<tr>
 					<td>
@@ -59,7 +57,7 @@
 						<a href="./bbscontent.do?num=${article.num} &pageNum=${pageNum}">${article.subject}</a>
 						
 						<c:set var="reg" value="${article.reg_date}"/>
-						<c:set var ="date" vlaue="${fn:substring(reg,0,10)}"/>
+						<c:set var ="date" value="${fn:substring(reg,0,10)}"/>
 						<!-- 게시글 날짜를 2012-12-02 -->
 						<c:if test="${today ==date}">
 							<img src="../images/new.gif"/>
@@ -82,6 +80,30 @@
 		</table>
 	
 	</c:if>
+	<!-- 페이지 리스트 -->
+	<c:if test="${count >0}">
+		<c:set var="pageCount" value="${totalPage}"/>
+		<c:set var="startPage" value="${startPage}"/>
+		<c:set var="endPage" value="${endPage}"/>
+		
+		<c:if test="${endPage >pageCount}">
+			<c:set var="endPage" value="${pageCount+1}"/>
+		</c:if>
+		
+		<c:if test ="${startPage>0}">
+			<a href="./bbslist.do?pageNum=${startPage}">[이전]</a>
+		</c:if>
+
+		<c:forEach var="i" begin="${startPage+1} " end="${endPage-1}">
+			<a href="./bbslist.do?pageNum=${i }">[${i }]</a>
+		</c:forEach>	
+		
+		<c:if test="${endPage<pageCount }">
+			<a href="./bbslist.do?pageNum=${startPage+11}"> [다음]</a>
+		</c:if>
+		
+	</c:if>
+	
 	
 	
 	

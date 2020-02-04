@@ -28,7 +28,7 @@ public class MyController extends HttpServlet{
 		String props= config.getInitParameter("propertyConfig");
 		//명령어와 처리 클래스의 매핑 정보를 저장할 properties 객체 생성 
 		Properties pr=new Properties();
-		FileInputStream f=null;
+		FileInputStream f=null; 
 		try {
 			//command.properties 파일 가져오기 
 			f=new FileInputStream(props);

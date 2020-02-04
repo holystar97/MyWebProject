@@ -177,6 +177,51 @@ public class BoardDBBean {
 
   }
   
+  public BoardDataBean getArticle(int num) throws Exception{
+	
+	  BoardDataBean article=null;
+	  try {
+		  con=dbopen.getConnection();
+		  StringBuffer sql=new StringBuffer();
+		  sql.append(" UPDATE board SET readcount=readcount+1 WHERE num=? ");
+		  pstmt=con.prepareStatement(sql.toString());
+		  pstmt.setInt(1, num);
+		  pstmt.executeUpdate();
+		  
+		  sql.delete(0, sql.length());
+		  sql.append(" SELECT num, writer,email,subject,passwd,reg_date,ref,re_step,re_level,content,ip,readcount ");
+		  sql.append(" FROM board WHERE num=? ");
+		  pstmt = con.prepareStatement(sql.toString());
+		  pstmt.setInt(1, num);
+		  rs=pstmt.executeQuery();
+		  if(rs.next()) {
+			  
+			  article=new BoardDataBean();
+			  article.setNum(rs.getInt("num"));
+			  article.setWriter(rs.getString("writer"));
+			  article.setEmail(rs.getString("email"));
+			  article.setSubject(rs.getString("subject"));
+			  article.setPasswd(rs.getString("passwd"));
+			  article.setReg_date(rs.getTimestamp("reg_date"));
+			  article.setReadcount(rs.getInt("readcount"));
+			  article.setRef(rs.getInt("ref"));
+			  article.setRe_step(rs.getInt("re_step"));
+			  article.setRe_level(rs.getInt("re_level"));
+			  article.setContent(rs.getString("content"));
+			  article.setIp(rs.getString("ip"));  
+		  }
+	  }catch(Exception e) {
+		  e.printStackTrace();
+	  }finally {
+		  DBClose.close(con,pstmt,rs);
+	  }
+	  
+	  return article;
+	  
+	  
+  }  
+  
+  
   
   
   
